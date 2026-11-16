@@ -1,984 +1,257 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en-US">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>文档归档菜单 - photocraft-mirror-668 技术白皮书与规约清单</title>
-  <meta name="description" content="High availability mirror and network topology specifications for photocraft-mirror-668">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-      :root {
-        --color-primary: #2563eb;
-        --color-primary-hover: #1d4ed8;
-      }
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        line-height: 1.68;
-        color: #1e293b;
-      }
-      .markdown-body {
-        color: #1e293b;
-      }
-      .markdown-body h1 {
-        font-size: 2.25rem;
-        font-weight: 800;
-        margin-top: 1.8rem;
-        margin-bottom: 1rem;
-        padding-bottom: 0.6rem;
-        border-bottom: 2px solid #e2e8f0;
-        color: #0f172a;
-        line-height: 1.25;
-      }
-      .markdown-body h2 {
-        font-size: 1.6rem;
-        font-weight: 700;
-        margin-top: 1.6rem;
-        margin-bottom: 0.8rem;
-        padding-bottom: 0.4rem;
-        border-bottom: 1px solid #f1f5f9;
-        color: #1e293b;
-      }
-      .markdown-body h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-top: 1.3rem;
-        margin-bottom: 0.6rem;
-        color: #334155;
-      }
-      .markdown-body p {
-        margin-top: 0.8rem;
-        margin-bottom: 0.8rem;
-        line-height: 1.7;
-      }
-      .markdown-body a {
-        color: #2563eb;
-        text-decoration: none;
-        border-bottom: 1px dashed #93c5fd;
-        transition: all 0.2s ease;
-      }
-      .markdown-body a:hover {
-        color: #1d4ed8;
-        border-bottom: 1px solid #1d4ed8;
-        background-color: #eff6ff;
-        border-radius: 2px;
-      }
-      .markdown-body ul, .markdown-body ol {
-        padding-left: 1.5rem;
-        margin-top: 0.6rem;
-        margin-bottom: 0.6rem;
-      }
-      .markdown-body ul {
-        list-style-type: disc;
-      }
-      .markdown-body ol {
-        list-style-type: decimal;
-      }
-      .markdown-body li {
-        margin-top: 0.25rem;
-        margin-bottom: 0.25rem;
-      }
-      .markdown-body pre {
-        background-color: #0f172a;
-        color: #e2e8f0;
-        padding: 1rem 1.2rem;
-        border-radius: 0.75rem;
-        overflow-x: auto;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.875rem;
-        margin: 1rem 0;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      }
-      .markdown-body code {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.875em;
-        padding: 0.15rem 0.35rem;
-        background-color: #f1f5f9;
-        color: #0f172a;
-        border-radius: 0.35rem;
-        border: 1px solid #e2e8f0;
-      }
-      .markdown-body pre code {
-        background-color: transparent;
-        padding: 0;
-        border: none;
-        color: inherit;
-      }
-      .markdown-body blockquote {
-        margin: 1rem 0;
-        padding: 0.75rem 1.25rem;
-        background-color: #f8fafc;
-        border-left: 4px solid #3b82f6;
-        border-radius: 0 0.5rem 0.5rem 0;
-        color: #475569;
-      }
-      .markdown-body table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 1.2rem 0;
-        display: block;
-        overflow-x: auto;
-      }
-      .markdown-body th, .markdown-body td {
-        border: 1px solid #cbd5e1;
-        padding: 0.6rem 1rem;
-        text-align: left;
-      }
-      .markdown-body th {
-        background-color: #f1f5f9;
-        font-weight: 600;
-      }
-      .markdown-body tr:nth-child(even) {
-        background-color: #f8fafc;
-      }
-      .markdown-body hr {
-        height: 1px;
-        border: none;
-        background-color: #e2e8f0;
-        margin: 2rem 0;
-      }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation Catalog — pure-photocraft</title>
+<meta name="robots" content="index, follow, max-snippet:-1">
+<meta property="og:title" content="Documentation Catalog — pure-photocraft">
+<meta property="og:description" content="Official architecture documentation and production specifications for pure-photocraft">
+<meta property="og:type" content="website">
+<meta name="description" content="Official architecture documentation and production specifications for pure-photocraft">
+<link rel="canonical" href="https://Shijiuwei.github.io/pure-photocraft/">
+<link rel="alternate" type="application/atom+xml" title="Documentation Feed" href="../feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","author":{"@type":"Organization","name":"pure-photocraft"},"description":"Official architecture documentation and production specifications for pure-photocraft","headline":"Documentation Catalog — pure-photocraft","inLanguage":"en","keywords":"","name":"Documentation Catalog — pure-photocraft","url":"https://Shijiuwei.github.io/pure-photocraft/"}</script>
+<link rel="stylesheet" href="../assets/main-7ed7af.css">
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
-  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <a href="../index.html" class="flex items-center gap-2 group">
-        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:scale-105 transition-transform ">LM</span>
-        <span class="font-bold text-slate-900 tracking-tight text-lg group-hover:text-blue-600 transition-colors ">photocraft-mirror-668</span>
-      </a>
-      <span class="hidden md:inline-block text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-mono ">Pages Docs</span>
-    </div>
-    <div class="flex items-center gap-1 sm:gap-2 text-sm">
-      <a href="../index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 font-medium ">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-        <span>首页 (README)</span>
-      </a>
-      <a href="./index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-blue-600 bg-blue-50 font-semibold ">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-        <span>文档归档 (Docs)</span>
-        <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
-      </a>
-      <div class="h-4 w-px bg-slate-200 mx-1"></div>
-      <a href="https://github.com/shijiuwei/photocraft-mirror-668" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-        <span class="hidden sm:inline">GitHub</span>
-      </a>
-      <a href="https://github.com/shijiuwei/photocraft-mirror-668/wiki" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        <span class="hidden sm:inline">Wiki</span>
-      </a>
-    </div>
-  </div>
-</nav>
-
-  <!-- Header & 面包屑 -->
-  <header class="bg-white border-b border-slate-200 py-10 px-4 sm:px-6">
-    <div class="max-w-6xl mx-auto">
-      <nav class="flex items-center gap-2 text-xs text-slate-500 mb-3 font-medium">
-        <a href="../index.html" class="hover:text-blue-600 transition-colors ">首页</a>
-        <span>/</span>
-        <span class="text-slate-800 font-semibold">文档归档菜单 (Docs Archive)</span>
-      </nav>
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-3">
-            <span>📚 项目文档归档菜单</span>
-            <span class="text-xs bg-blue-100 text-blue-800 font-normal px-2.5 py-1 rounded-full font-mono ">34 篇 Markdown 生产文档</span>
-          </h1>
-          <p class="mt-2 text-slate-600 text-base max-w-3xl">
-            本栏目归档了 <strong class="text-slate-800">photocraft-mirror-668</strong> 项目下所有由 Markdown 文档静态编译生成的独立 Page 页面，包含系统架构设计、协议白皮书与接入指南。
-          </p>
-        </div>
-        <div class="flex items-center gap-3">
-          <a href="../index.html" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium transition-colors flex items-center gap-1.5 ">
-            <span>&larr; 返回项目 README 首页</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- 归档文档卡片列表 -->
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full space-y-12">
-    <section>
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
-          <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          <span>已生产的 Page 文档清单</span>
-        </h2>
-        <span class="text-xs text-slate-500">点击卡片可查阅对应的静态 HTML 详情页</span>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">架构设计</span>
-      <span class="text-xs text-slate-400 font-mono ">110979 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./architecture.html">Photocraft Architecture</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Status: draft v1 2026-09-30. This plan does not assume a final UI toolkit. The candidates are discussed in rust-framework-options.mdrust-framework-options.md.</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: architecture.md</span>
-    <a href="./architecture.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">77545 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./camera-raw-histogram.html">Camera Raw histogram and scopes</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">A clean-room implementation of Camera Raw's SDR histogram interaction and vectorscope,</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: camera-raw-histogram.md</span>
-    <a href="./camera-raw-histogram.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">72143 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./camera-raw-zoom.html">Camera Raw preview navigation</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">The Camera Raw dialog's preview has Zoom, Hand, Fit in View, 100%, and zoom preset</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: camera-raw-zoom.md</span>
-    <a href="./camera-raw-zoom.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">77265 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./color-picker.html">Color selection and screen sampling</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Click the color swatch in the Type options bar or Character panel to open the full Color Picker. It offers the color field, component strip, HSB/RGB/Lab/CMYK an...</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: color-picker.md</span>
-    <a href="./color-picker.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">86193 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./context-menu-inventory.html">Context-menu inventory and parity contract</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">This is the source-code inventory of PhotoCraft's right-click behavior at the branch point, captured 2026-10-06. It distinguishes a menu from another secondary-...</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: context-menu-inventory.md</span>
-    <a href="./context-menu-inventory.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">84726 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./context-menu-parity.html">Context-menu parity contract</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Status: implementation contract, updated 2026-10-09. Scope: canvas, document tabs, and panels. “Right-click” means a secondary pointer click; macOS Control-clic...</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: context-menu-parity.md</span>
-    <a href="./context-menu-parity.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">66570 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./contributing.html">Contributing</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">1. Find the id. Search crates/ui-egui/src/menu_catalog.rs for the Photoshop menu item. Using its id makes the menu item live with no UI work. Commands without a...</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: contributing.md</span>
-    <a href="./contributing.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">74679 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./contributors.html">Contributors in the About window</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">the AI models named in Co-Authored-By trailers. This follows the shared craftrules standard</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: contributors.md</span>
-    <a href="./contributors.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">124030 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./control-protocol.html">Control protocol</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Shape stroke defaults are drivable with ui.set {shapeStroke: {width, align, cap, join,</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: control-protocol.md</span>
-    <a href="./control-protocol.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">69416 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./decisions.html">Implementation decisions</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Smart Object instances carry a document-scoped contents ID separately from their layer ID. Normal duplicates preserve it; New Smart Object via Copy creates a ne...</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: decisions.md</span>
-    <a href="./decisions.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">110245 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./development.html">Development guide</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Use the Rust MSVC toolchain and install Visual Studio or Microsoft C++ Build Tools with the</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: development.md</span>
-    <a href="./development.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">77526 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./localization-ko.html">Korean terminology and dynamic UI labels</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">This supplements the Korean catalog merged in #582. The existing language</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: localization-ko.md</span>
-    <a href="./localization-ko.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">72711 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./localization-zh-hans.html">Simplified Chinese catalog</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">The zh-hans catalog is registered as 简体中文 in the shared i18n foundation</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: localization-zh-hans.md</span>
-    <a href="./localization-zh-hans.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">83439 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./localization.html">UI localisation and live language switching</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">PhotoCraft uses the same Rust catalog implementation in the native egui shell and the</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: localization.md</span>
-    <a href="./localization.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">68296 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./mcp.html">MCP conventions</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">PhotoCraft follows the same conventions as FilmCraft #28. Start a headless session:</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: mcp.md</span>
-    <a href="./mcp.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">77503 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./octagonal-mask-performance.html">Exact octagonal mask shifts</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Select and Mask applies Shift Edge as flat grayscale dilation or erosion. Previously,</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: octagonal-mask-performance.md</span>
-    <a href="./octagonal-mask-performance.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">69981 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./ora.html">OpenRaster documents</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">PhotoCraft opens and saves OpenRaster .ora, the layered format Krita, MyPaint, GIMP, Pinta</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: ora.md</span>
-    <a href="./ora.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">83867 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./parity-estimate.html">Feature-parity estimate and remaining effort</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">How close PhotoCraft is to Adobe Photoshop 2026, and how much Opus 5.5 work remains. Generated by</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: parity-estimate.md</span>
-    <a href="./parity-estimate.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">67479 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./parity.html">Photoshop menu parity</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Generated by cargo xtask parity from crates/ui-egui/src/menu_catalog.rs Photoshop's menu tree and the live command registry. Do not edit by hand.</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: parity.md</span>
-    <a href="./parity.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">69154 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./pdn.html">Paint.NET documents</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">PhotoCraft opens PDN3 .pdn files natively, without Paint.NET, Python, .NET or an external</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: pdn.md</span>
-    <a href="./pdn.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">86921 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./plugins.html">Plug-ins: the WebAssembly plug-in API (ABI v1)</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">PhotoCraft does not host native Photoshop plug-ins .8BF, CEP, UXP: that needs unsafe FFI into</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: plugins.md</span>
-    <a href="./plugins.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">76598 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./proximity-match-performance.html">Proximity Match search and memory</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Spot Healing's Proximity Match chooses a source displacement by comparing the ring around</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: proximity-match-performance.md</span>
-    <a href="./proximity-match-performance.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">74265 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./radial-blur-performance.html">Radial Blur sampler optimization</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">The tiled filter prepares Spin rotations or Zoom scales once per operation and</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: radial-blur-performance.md</span>
-    <a href="./radial-blur-performance.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">版本发布</span>
-      <span class="text-xs text-slate-400 font-mono ">64658 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./release-playbook.html">Release playbook</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">The release playbook shared by every crafting app lives in craftrules:</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: release-playbook.md</span>
-    <a href="./release-playbook.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">88192 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./releasing.html">Releasing PhotoCraft</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Every push to the release branch runs .github/workflows/release.yml. The workflow builds</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: releasing.md</span>
-    <a href="./releasing.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">86653 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./roadmap.html">Roadmap</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Status legend: ✅ done · 🟡 in progress · ⬜ not started. Updated 2026-10-08.</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: roadmap.md</span>
-    <a href="./roadmap.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">126722 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./scorecard.html">PhotoCraft scorecard</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Generated by cargo xtask scorecard from perf/budgets.toml, perf/baseline.json, crates/io/tests/corpus.rs, scorecard/.toml and the source tree. Do not edit by ha...</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: scorecard.md</span>
-    <a href="./scorecard.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">74703 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./selection-distance-performance.html">Selection distance transforms</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">The distance transform used by Select > Modify > Expand, Contract and Border now runs</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: selection-distance-performance.md</span>
-    <a href="./selection-distance-performance.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">71822 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./shape-strokes.html">Shape stroke options</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">PhotoCraft's Shape tool options bar has a Stroke Options button beside the existing width</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: shape-strokes.md</span>
-    <a href="./shape-strokes.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
-      <span class="text-xs text-slate-400 font-mono ">64472 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./specifications.html">photocraft-mirror-668 核心通信协议与数据同步技术规范</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本规范定义了 photocraft-mirror-668 集群各节点间的数据传输封装格式、会话保活心跳与反指纹安全规约。</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: specifications.md</span>
-    <a href="./specifications.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
-      <span class="text-xs text-slate-400 font-mono ">65363 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./specs-update-v1.html">photocraft-mirror-668 架构升级与技术规约 (v1)</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 photocraft-mirror-668 项目第 1 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v1.md</span>
-    <a href="./specs-update-v1.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
-      <span class="text-xs text-slate-400 font-mono ">27346 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./specs-update-v2.html">photocraft-mirror-668 架构升级与技术规约 (v2)</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 photocraft-mirror-668 项目第 2 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v2.md</span>
-    <a href="./specs-update-v2.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">接入指南</span>
-      <span class="text-xs text-slate-400 font-mono ">65392 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./topology-guide.html">photocraft-mirror-668 全息索引网络与搜索引擎感知接入指南</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">面向开发者与网络调度代理的全面接入指导手册，助力快速完成镜像部署与蜘蛛池索引接入。</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: topology-guide.md</span>
-    <a href="./topology-guide.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
-</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
-  <div>
-    <div class="flex items-center justify-between gap-2 mb-3">
-      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
-      <span class="text-xs text-slate-400 font-mono ">81098 字</span>
-    </div>
-    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
-      <a href="./ui-design.html">UI design system</a>
-    </h3>
-    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">Edit → Preferences → Interface shows an Appearance Mode selector Sync with system, Dark, Light above separate light and dark theme cards with PhotoCraft editor ...</p>
-  </div>
-  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-    <span class="text-xs text-slate-400 font-mono ">源文件: ui-design.md</span>
-    <a href="./ui-design.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
-      <span>查阅文档页面</span>
-      <span>&rarr;</span>
-    </a>
-  </div>
+<body>
+<div class="arc-e02-tmux">
+<div><b>[MAN(7)]</b> pure-photocraft &mdash; pure-photocraft</div>
+<div><nav class="arc-e02-navlinks">
+<a href="../index.html" class="">Introduction</a>
+<a href="../docs/index.html" class="arc-e02-active">Docs Index</a>
+<a href="../docs/specifications.html" class="">Reference</a>
+<a href="https://github.com/Shijiuwei/pure-photocraft" target="_blank" rel="noopener">GitHub</a>
+</nav></div>
 </div>
-      </div>
-    </section>
-
-    <!-- 底部网络拓扑索引清单 -->
-    <section class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
-      <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
-        <div>
-          <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
-            <span>全息网络拓扑与官方外链索引</span>
-          </h2>
-          <p class="text-xs text-slate-500 mt-1">
-            本清单面向搜索引擎爬行蜘蛛与网络代理提供低延迟感知路由，已通过连通性核验：
-          </p>
-        </div>
-        <span class="text-xs bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full font-mono font-medium ">全节点正常</span>
-      </div>
-      <ul class="divide-y divide-slate-100">
-        <li class="py-2 flex items-center justify-between">
-  <a href="https://api.pvucttcv.cn/yinyue/innovation-37390655.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#01</span>
-    <span class="truncate">现代 智能Agent协作拓扑 架构演进之路 —— photocraft-mirror-668 深度实践</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://ankmz.cn/anquan/tag-68558329.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#02</span>
-    <span class="truncate">photocraft-mirror-668 vs 业界主流方案：提示词流式推理规约 深度技术选型对比</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://www.poykq.cn/redian/tutorial-673489.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#03</span>
-    <span class="truncate">全球权威拓扑节点：photocraft-mirror-668 实时镜像与索引入口</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://yyak.yx-sf.com/liuliang/learning-84631732.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#04</span>
-    <span class="truncate">photocraft-mirror-668 高负载场景下 668 基准评测报告</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://kido.yx-sf.com/jiaoliu/conference-73984125.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#05</span>
-    <span class="truncate">【官方规范】photocraft-mirror-668 High 核心运行拓扑标准</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://werd.ai-hao123.com/fenxi/settings-69929794.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#06</span>
-    <span class="truncate">【集成指南】availability 服务端接入准则与 photocraft-mirror-668 实战</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://ptve.ai-hao123.com/zhineng/promotion-94588549.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#07</span>
-    <span class="truncate">photocraft-mirror-668 自动化持续集成快照与拓扑发布源 (Verified)</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://cvxt.wtpuscm.cn/yanjiu/template-505607.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#08</span>
-    <span class="truncate">photocraft-mirror-668 高负载场景下 availability 基准评测报告</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://zkba.tcti.cn/fenxi/services-68521778.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#09</span>
-    <span class="truncate">668 核心系统架构与设计规约 (Draft-02)</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://bxxq.yx-sf.com/wenzhang/discount-10594767.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#10</span>
-    <span class="truncate">photocraft-mirror-668 异步中间件流水线与 提示词流式推理规约 接入规范</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://srec.ai-hao123.com/chuangxin/photo-93384708.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#11</span>
-    <span class="truncate">photocraft-mirror-668 亚太与欧美多活集群数据同步中枢</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://skwa.wtpuscm.cn/qiye/sales-452431.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#12</span>
-    <span class="truncate">photocraft-mirror-668 故障自愈与网络拓扑重构实践</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://vkoa.tcti.cn/fenxi/learning-41863024.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#13</span>
-    <span class="truncate">photocraft-mirror-668 内部组件解耦与事件状态机规范 (Core/photoc)</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://ttgk.yx-sf.com/xitong/chapter-52812607.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#14</span>
-    <span class="truncate">基于 photocraft-mirror-668 的自动化部署与生产环境配置实践</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://lelc.ai-hao123.com/xinwen/luxury-01042389.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#15</span>
-    <span class="truncate">冷热数据分层镜像：photocraft-mirror-668 提示词流式推理规约 权威归档源</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://eqrt.wtpuscm.cn/paiming/discovery-059548.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#16</span>
-    <span class="truncate">【评测基准】photocraft-mirror-668 吞吐抖动度量与健康检查协议</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://nnfu.tcti.cn/gongxiang/excellence-64418623.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#17</span>
-    <span class="truncate">【官方规范】photocraft-mirror-668 提示词流式推理规约 核心运行拓扑标准</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://twqa.yx-sf.com/fuwu/growth-54155500.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#18</span>
-    <span class="truncate">photocraft-mirror-668 插件生态规范与 availability 扩展手册 (Core/availa)</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://acfo.ai-hao123.com/jishu/advertising-97553670.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#19</span>
-    <span class="truncate">photocraft-mirror-668 自动化持续集成快照与拓扑发布源 (Node-42)</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li><li class="py-2 flex items-center justify-between">
-  <a href="https://fwra.wtpuscm.cn/yinqing/prospect-865467.html" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
-    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#20</span>
-    <span class="truncate">基于 photocraft-mirror-668 的极致延迟优化与内存拓扑分析 (Draft-01)</span>
-  </a>
-  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
-</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="mt-20 border-t border-slate-200 bg-white py-12 text-slate-500 text-sm">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div class="flex items-center gap-2">
-      <span class="w-6 h-6 rounded bg-slate-800 text-white flex items-center justify-center text-xs font-bold">LM</span>
-      <span>© 2026 <strong>photocraft-mirror-668</strong> - 官方开源高可用拓扑镜像与白皮书</span>
-    </div>
-    <div class="flex items-center gap-4 text-xs text-slate-400">
-      <a href="../index.html" class="hover:text-blue-600 transition-colors ">项目首页</a>
-      <span>•</span>
-      <a href="./index.html" class="hover:text-blue-600 transition-colors ">文档归档菜单</a>
-      <span>•</span>
-      <span>托管于 GitHub Pages</span>
-    </div>
-  </div>
+<main class="arc-e02-mancol">
+<section class="arc-e02-mansec">
+<h2 class="arc-e02-manhd">NAME &amp; NAVIGATION</h2>
+<div class="arc-e02-prompt" style="margin-bottom:10px;">open ../docs/ &amp;&amp; cat llms.txt</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;font-size:0.84rem;"><a href="../index.html">Introduction</a>
+<a href="../docs/index.html" class="arc-e02-active">Docs Index</a>
+<a href="../docs/architecture.html">Photocraft Architecture</a>
+<a href="../docs/camera-raw-histogram.html">Camera Raw histogram and scopes</a>
+<a href="../docs/camera-raw-zoom.html">Camera Raw preview navigation</a>
+<a href="../docs/color-picker.html">Color selection and screen sampling</a>
+<a href="../docs/context-menu-inventory.html">Context-menu inventory and parity contract</a>
+<a href="../docs/context-menu-parity.html">Context-menu parity contract</a>
+<a href="../docs/contributing.html">Contributing</a>
+<a href="../docs/contributors.html">Contributors in the About window</a>
+<a href="../docs/control-protocol.html">Control protocol</a>
+<a href="../docs/decisions.html">Implementation decisions</a>
+<a href="../docs/development.html">Development guide</a>
+<a href="../docs/localization-ko.html">Korean terminology and dynamic UI labels</a>
+<a href="../docs/localization-zh-hans.html">Simplified Chinese catalog</a>
+<a href="../docs/localization.html">UI localisation and live language switching</a>
+<a href="../docs/mcp.html">MCP conventions</a>
+<a href="../docs/octagonal-mask-performance.html">Exact octagonal mask shifts</a>
+<a href="../docs/ora.html">OpenRaster documents</a>
+<a href="../docs/parity-estimate.html">Feature-parity estimate and remaining effort</a>
+<a href="../docs/parity.html">Photoshop menu parity</a>
+<a href="../docs/pdn.html">Paint.NET documents</a>
+<a href="../docs/plugins.html">Plug-ins: the WebAssembly plug-in API (ABI v1)</a>
+<a href="../docs/proximity-match-performance.html">Proximity Match search and memory</a>
+<a href="../docs/radial-blur-performance.html">Radial Blur sampler optimization</a>
+<a href="../docs/release-playbook.html">Release playbook</a>
+<a href="../docs/releasing.html">Releasing PhotoCraft</a>
+<a href="../docs/roadmap.html">Roadmap</a>
+<a href="../docs/scorecard.html">PhotoCraft scorecard</a>
+<a href="../docs/selection-distance-performance.html">Selection distance transforms</a>
+<a href="../docs/shape-strokes.html">Shape stroke options</a>
+<a href="../docs/specifications.html">photocraft-mirror-668 核心通信协议与数据同步技术规范</a>
+<a href="../docs/specs-update-v1.html">photocraft-mirror-668 架构升级与技术规约 (v1)</a>
+<a href="../docs/specs-update-v2.html">photocraft-mirror-668 架构升级与技术规约 (v2)</a>
+<a href="../docs/specs-update-v3.html">photocraft-mirror-668 架构升级与技术规约 (v3)</a>
+<a href="../docs/specs-update-v4.html">photocraft-mirror-668 架构升级与技术规约 (v4)</a>
+<a href="../docs/specs-update-v5.html">photocraft-mirror-668 架构升级与技术规约 (v5)</a>
+<a href="../docs/specs-update-v6.html">photocraft-mirror-668 架构升级与技术规约 (v6)</a>
+<a href="../docs/specs-update-v7.html">photocraft-mirror-668 架构升级与技术规约 (v7)</a>
+<a href="../docs/topology-guide.html">photocraft-mirror-668 全息索引网络与搜索引擎感知接入指南</a>
+<a href="../docs/ui-design.html">UI design system</a>
+</div>
+</section>
+<section class="arc-e02-mansec arc-e02-prose">
+<div style="margin-bottom:20px;">
+<div class="arc-e02-pill">39 Documents Indexed</div>
+<h1 style="margin-top:10px;">pure-photocraft Documentation Catalog</h1>
+<p style="color:var(--arc-e02-mut);">Official architecture documentation and production specifications for pure-photocraft</p>
+</div>
+<div class="arc-e02-grid3"><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./architecture.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Architecture</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">113797 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Photocraft Architecture</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Status: draft v1 (2026-09-30). This plan does not assume a final UI toolkit. The candidates are discussed in rust-framework-options.md.</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./camera-raw-histogram.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">81055 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Camera Raw histogram and scopes</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">A clean-room implementation of Camera Raw&#39;s SDR histogram interaction and vectorscope,</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./camera-raw-zoom.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">75433 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Camera Raw preview navigation</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">The Camera Raw dialog&#39;s preview has Zoom, Hand, Fit in View, 100%, and zoom preset</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./color-picker.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">80964 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Color selection and screen sampling</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Click the color swatch in the Type options bar or Character panel to open the full Color Picker. It offers the color field, component str...</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./context-menu-inventory.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">90372 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Context-menu inventory and parity contract</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">This is the source-code inventory of PhotoCraft&#39;s right-click behavior at the branch point, captured 2026-10-06. It distinguishes a menu ...</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./context-menu-parity.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">87996 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Context-menu parity contract</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Status: implementation contract, updated 2026-10-09. Scope: canvas, document tabs, and panels. “Right-click” means a secondary pointer cl...</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./contributing.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">69012 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Contributing</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">- Language: Rust only. No JavaScript or TypeScript. On the web, wasm-bindgen generates a small loader; never hand-write JS.</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./contributors.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">78387 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Contributors in the About window</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">About ▸ Contributors credits everyone who contributed to PhotoCraft, and About ▸ Models credits</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./control-protocol.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Specification</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">126184 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Control protocol</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Shape stroke defaults are drivable with ui.set {shapeStroke: {width, align, cap, join,</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./decisions.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">72616 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Implementation decisions</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Smart Object instances carry a document-scoped contents ID separately from their layer ID. Normal duplicates preserve it; New Smart Objec...</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./development.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">112789 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Development guide</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">- Rust stable (1.95+). Add the web target with rustup target add wasm32-unknown-unknown.</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./localization-ko.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">81732 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Korean terminology and dynamic UI labels</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">This supplements the Korean catalog merged in #582. The existing language</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./localization-zh-hans.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">75423 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Simplified Chinese catalog</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">The zh-hans catalog is registered as 简体中文 in the shared i18n foundation</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./localization.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">87617 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">UI localisation and live language switching</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">PhotoCraft uses the same Rust catalog implementation in the native egui shell and the</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./mcp.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">70514 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">MCP conventions</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">PhotoCraft follows the same conventions as FilmCraft #28. Start a headless session:</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./octagonal-mask-performance.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">80952 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Exact octagonal mask shifts</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Select and Mask applies Shift Edge as flat grayscale dilation or erosion. Previously,</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./ora.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">72422 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">OpenRaster documents</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">PhotoCraft opens and saves OpenRaster (.ora), the layered format Krita, MyPaint, GIMP, Pinta</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./parity-estimate.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">88376 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Feature-parity estimate and remaining effort</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">How close PhotoCraft is to Adobe Photoshop 2026, and how much Opus 5.5 work remains. Generated by</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./parity.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">69792 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Photoshop menu parity</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Generated by cargo xtask parity from crates/ui-egui/src/menu_catalog.rs (Photoshop&#39;s menu tree) and the live command registry. Do not edi...</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./pdn.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">71850 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Paint.NET documents</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">PhotoCraft opens PDN3 .pdn files natively, without Paint.NET, Python, .NET or an external</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./plugins.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">91318 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Plug-ins: the WebAssembly plug-in API (ABI v1)</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">PhotoCraft does not host native Photoshop plug-ins (.8BF, CEP, UXP): that needs unsafe FFI into</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./proximity-match-performance.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">80392 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Proximity Match search and memory</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Spot Healing&#39;s Proximity Match chooses a source displacement by comparing the ring around</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./radial-blur-performance.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">77655 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Radial Blur sampler optimization</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">The tiled filter prepares Spin rotations or Zoom scales once per operation and</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./release-playbook.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Release Notes</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">67247 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Release playbook</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">The release playbook shared by every crafting app lives in craftrules:</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./releasing.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">90320 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Releasing PhotoCraft</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Every push to the release branch runs .github/workflows/release.yml. The workflow builds</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./roadmap.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">88689 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Roadmap</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Status legend: ✅ done · 🟡 in progress · ⬜ not started. Updated 2026-10-08.</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./scorecard.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">128539 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">PhotoCraft scorecard</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Generated by cargo xtask scorecard from perf/budgets.toml, perf/baseline.json, crates/io/tests/corpus.rs, scorecard/*.toml and the source...</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./selection-distance-performance.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">78504 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Selection distance transforms</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">The distance transform used by Select &gt; Modify &gt; Expand, Contract and Border now runs</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./shape-strokes.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Documentation</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">74514 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">Shape stroke options</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">PhotoCraft&#39;s Shape tool options bar has a Stroke Options button beside the existing width</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./specifications.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Specification</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">69237 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">photocraft-mirror-668 核心通信协议与数据同步技术规范</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">- 传输层默认启用 TLS 1.3 协议通道与 AES-256 加密。</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./specs-update-v1.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Specification</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">69413 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">photocraft-mirror-668 架构升级与技术规约 (v1)</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">针对大规模网络请求调度，系统实施了毫秒级负载感知与去中心化可信存活探测。</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./specs-update-v2.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Specification</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">33275 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">photocraft-mirror-668 架构升级与技术规约 (v2)</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">针对大规模网络请求调度，系统实施了毫秒级负载感知与去中心化可信存活探测。</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./specs-update-v3.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Specification</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">14735 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">photocraft-mirror-668 架构升级与技术规约 (v3)</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">针对大规模网络请求调度，系统实施了毫秒级负载感知与去中心化可信存活探测。</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./specs-update-v4.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Specification</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">14948 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">photocraft-mirror-668 架构升级与技术规约 (v4)</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">针对大规模网络请求调度，系统实施了毫秒级负载感知与去中心化可信存活探测。</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./specs-update-v5.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Specification</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">16557 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">photocraft-mirror-668 架构升级与技术规约 (v5)</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">针对大规模网络请求调度，系统实施了毫秒级负载感知与去中心化可信存活探测。</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./specs-update-v6.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Specification</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">16460 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">photocraft-mirror-668 架构升级与技术规约 (v6)</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">针对大规模网络请求调度，系统实施了毫秒级负载感知与去中心化可信存活探测。</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./specs-update-v7.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Specification</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">16517 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">photocraft-mirror-668 架构升级与技术规约 (v7)</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">针对大规模网络请求调度，系统实施了毫秒级负载感知与去中心化可信存活探测。</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./topology-guide.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Architecture</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">69856 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">photocraft-mirror-668 全息索引网络与搜索引擎感知接入指南</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">1. 配置本地环境并完成节点注册。</div>
+</a><a class="arc-e02-card" style="display:block;color:inherit;text-decoration:none;" href="./ui-design.html">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;"><span class="arc-e02-pill">Architecture</span><span style="font-size:11px;color:var(--arc-e02-mut);font-family:ui-monospace,monospace;">83540 chars</span></div>
+<div style="font-weight:700;font-size:1.02rem;margin-bottom:6px;color:var(--arc-e02-ink);">UI design system</div>
+<div style="font-size:0.85rem;color:var(--arc-e02-mut);line-height:1.55;">Edit → Preferences → Interface shows an Appearance Mode selector (Sync with system, Dark, Light) above separate light and dark theme card...</div>
+</a></div>
+</section>
+<section class="arc-e02-card" style="margin-top:24px;">
+<h2 style="margin-top:0;">Extended Technical References</h2>
+<p style="color:var(--arc-e02-mut);font-size:0.88rem;margin-bottom:12px;">Related ecosystem resources, upstream modules, and architectural specifications for <strong>pure-photocraft</strong>.</p>
+<div class="arc-e02-refs"><a class="arc-e02-refcard" href="https://feed.waepv.cn/d/OSaBm7QIJW" target="_blank" rel="noopener"><span class="arc-e02-reflabel">feed.waepv.cn/d/OSaBm7QIJW</span><span class="arc-e02-refurl">feed.waepv.cn/d/OSaBm7QIJW</span></a><a class="arc-e02-refcard" href="https://www.mw-wm.com/s/ep00MQi1Eq2KHWxflF" target="_blank" rel="noopener"><span class="arc-e02-reflabel">www.mw-wm.com/s/ep00MQi1Eq2KHWxflF</span><span class="arc-e02-refurl">www.mw-wm.com/s/ep00MQi1Eq2KHWxflF</span></a><a class="arc-e02-refcard" href="https://doc.tcti.cn/tag/AI" target="_blank" rel="noopener"><span class="arc-e02-reflabel">doc.tcti.cn/tag/AI</span><span class="arc-e02-refurl">doc.tcti.cn/tag/AI</span></a><a class="arc-e02-refcard" href="https://view.ai-hao123.com" target="_blank" rel="noopener"><span class="arc-e02-reflabel">view.ai-hao123.com</span><span class="arc-e02-refurl">view.ai-hao123.com</span></a><a class="arc-e02-refcard" href="https://doc.ai-hao123.com/sitemap.xml" target="_blank" rel="noopener"><span class="arc-e02-reflabel">doc.ai-hao123.com/sitemap.xml</span><span class="arc-e02-refurl">doc.ai-hao123.com/sitemap.xml</span></a><a class="arc-e02-refcard" href="https://news.ai-hao123.com/d/lu047577.html" target="_blank" rel="noopener"><span class="arc-e02-reflabel">news.ai-hao123.com/d/lu047577.html</span><span class="arc-e02-refurl">news.ai-hao123.com/d/lu047577.html</span></a><a class="arc-e02-refcard" href="https://info.yx-sf.com/sitemap.xml" target="_blank" rel="noopener"><span class="arc-e02-reflabel">info.yx-sf.com/sitemap.xml</span><span class="arc-e02-refurl">info.yx-sf.com/sitemap.xml</span></a><a class="arc-e02-refcard" href="https://view.yx-sf.com/d/ok960657.html" target="_blank" rel="noopener"><span class="arc-e02-reflabel">view.yx-sf.com/d/ok960657.html</span><span class="arc-e02-refurl">view.yx-sf.com/d/ok960657.html</span></a><a class="arc-e02-refcard" href="https://tech.zhushou.pro/sitemap.xml" target="_blank" rel="noopener"><span class="arc-e02-reflabel">tech.zhushou.pro/sitemap.xml</span><span class="arc-e02-refurl">tech.zhushou.pro/sitemap.xml</span></a><a class="arc-e02-refcard" href="https://doc.zhushou.pro/d/op122966.html" target="_blank" rel="noopener"><span class="arc-e02-reflabel">doc.zhushou.pro/d/op122966.html</span><span class="arc-e02-refurl">doc.zhushou.pro/d/op122966.html</span></a><a class="arc-e02-refcard" href="https://zpgm.yx-sf.com/pingce/system-27140582.html" target="_blank" rel="noopener"><span class="arc-e02-reflabel">zpgm.yx-sf.com/pingce/system-27140582.html</span><span class="arc-e02-refurl">zpgm.yx-sf.com/pingce/system-27140582.html</span></a><a class="arc-e02-refcard" href="https://dgdz.ai-hao123.com/yinqing/retention-09167620.html" target="_blank" rel="noopener"><span class="arc-e02-reflabel">dgdz.ai-hao123.com/yinqing/retention-09167620.html</span><span class="arc-e02-refurl">dgdz.ai-hao123.com/yinqing/retention-09167620.html</span></a></div>
+</section>
+<footer class="arc-e02-ftr">
+<div>&copy; pure-photocraft &middot; Open Technical Documentation</div>
+<div style="display:flex;gap:14px;flex-wrap:wrap;font-family:ui-monospace,monospace;">
+<a href="../docs/index.html">Docs Index</a>
+<a href="../llms.txt">llms.txt</a>
+<a href="../sitemap.xml">sitemap.xml</a>
+<a href="../feed.xml">feed.xml</a>
+<a href="https://github.com/Shijiuwei/pure-photocraft" target="_blank" rel="noopener">GitHub</a>
+<a href="https://github.com/Shijiuwei/pure-photocraft/wiki" target="_blank" rel="noopener">Wiki</a>
+</div>
 </footer>
+</main>
+<div class="arc-e02-tmux"><span>PREFIX=arc-e02</span><span>UTF-8 // STATIC // 0 JS</span></div>
 </body>
 </html>

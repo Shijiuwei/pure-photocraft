@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>pure-photocraft</title>
+  <subtitle>Official architecture documentation and production specifications for pure-photocraft</subtitle>
+  <link href="https://Shijiuwei.github.io/pure-photocraft/feed.xml" rel="self"/>
+  <id>https://Shijiuwei.github.io/pure-photocraft/</id>
+  <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+  <entry>
+    <title>Photocraft Architecture</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/architecture.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/architecture.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>Status: draft v1 (2026-09-30). This plan does not assume a final UI toolkit. The candidates are discussed in rust-framework-options.md.</summary>
+  </entry>
+  <entry>
+    <title>Camera Raw histogram and scopes</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/camera-raw-histogram.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/camera-raw-histogram.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>A clean-room implementation of Camera Raw&#39;s SDR histogram interaction and vectorscope,</summary>
+  </entry>
+  <entry>
+    <title>Camera Raw preview navigation</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/camera-raw-zoom.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/camera-raw-zoom.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>The Camera Raw dialog&#39;s preview has Zoom, Hand, Fit in View, 100%, and zoom preset</summary>
+  </entry>
+  <entry>
+    <title>Color selection and screen sampling</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/color-picker.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/color-picker.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>Click the color swatch in the Type options bar or Character panel to open the full Color Picker. It offers the color field, component str...</summary>
+  </entry>
+  <entry>
+    <title>Context-menu inventory and parity contract</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/context-menu-inventory.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/context-menu-inventory.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>This is the source-code inventory of PhotoCraft&#39;s right-click behavior at the branch point, captured 2026-10-06. It distinguishes a menu ...</summary>
+  </entry>
+  <entry>
+    <title>Context-menu parity contract</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/context-menu-parity.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/context-menu-parity.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>Status: implementation contract, updated 2026-10-09. Scope: canvas, document tabs, and panels. “Right-click” means a secondary pointer cl...</summary>
+  </entry>
+  <entry>
+    <title>Contributing</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/contributing.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/contributing.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>- Language: Rust only. No JavaScript or TypeScript. On the web, wasm-bindgen generates a small loader; never hand-write JS.</summary>
+  </entry>
+  <entry>
+    <title>Contributors in the About window</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/contributors.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/contributors.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>About ▸ Contributors credits everyone who contributed to PhotoCraft, and About ▸ Models credits</summary>
+  </entry>
+  <entry>
+    <title>Control protocol</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/control-protocol.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/control-protocol.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>Shape stroke defaults are drivable with ui.set {shapeStroke: {width, align, cap, join,</summary>
+  </entry>
+  <entry>
+    <title>Implementation decisions</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/decisions.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/decisions.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>Smart Object instances carry a document-scoped contents ID separately from their layer ID. Normal duplicates preserve it; New Smart Objec...</summary>
+  </entry>
+  <entry>
+    <title>Development guide</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/development.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/development.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>- Rust stable (1.95+). Add the web target with rustup target add wasm32-unknown-unknown.</summary>
+  </entry>
+  <entry>
+    <title>Korean terminology and dynamic UI labels</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/localization-ko.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/localization-ko.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>This supplements the Korean catalog merged in #582. The existing language</summary>
+  </entry>
+  <entry>
+    <title>Simplified Chinese catalog</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/localization-zh-hans.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/localization-zh-hans.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>The zh-hans catalog is registered as 简体中文 in the shared i18n foundation</summary>
+  </entry>
+  <entry>
+    <title>UI localisation and live language switching</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/localization.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/localization.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>PhotoCraft uses the same Rust catalog implementation in the native egui shell and the</summary>
+  </entry>
+  <entry>
+    <title>MCP conventions</title>
+    <link href="https://Shijiuwei.github.io/pure-photocraft/docs/mcp.html"/>
+    <id>https://Shijiuwei.github.io/pure-photocraft/docs/mcp.html</id>
+    <updated>2026-11-16T19:44:53.305447300+00:00</updated>
+    <summary>PhotoCraft follows the same conventions as FilmCraft #28. Start a headless session:</summary>
+  </entry>
+</feed>
